@@ -1,0 +1,188 @@
+openapi: 3.0.0
+info:
+  title: API Documentation
+  description: API documentation for your server
+  version: 1.0.0
+servers:
+  - url: http://your-server-url.com
+paths:
+  /api/student-login:
+    get:
+      summary: Student Login
+      description: Endpoint to authenticate student login
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+            format: email
+            description: Student's email
+        - name: password
+          in: query
+          required: true
+          schema:
+            type: string
+            description: Student's password
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+    # Add similar documentation for other endpoints...
+  /api/admin-login:
+    get:
+      summary: Admin Login
+      description: Endpoint to authenticate admin login
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+            format: email
+            description: Admin's email
+        - name: password
+          in: query
+          required: true
+          schema:
+            type: string
+            description: Admin's password
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+    # Add similar documentation for other endpoints...
+  /api/informazioniStudente:
+    get:
+      summary: Get Student Information
+      description: Retrieve information about a student
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+            format: email
+            description: Student's email
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object  # Define your response schema accordingly
+    # Add similar documentation for other endpoints...
+  /p002_ProgettoPCTO/p002_ProgettoPCTOcode/api/studenti:
+    get:
+      summary: Get Students
+      description: Retrieve list of students
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array  # Define your response schema accordingly
+    # Add similar documentation for other endpoints...
+  /api/aziende:
+    get:
+      summary: Get Companies
+      description: Retrieve list of companies
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array  # Define your response schema accordingly
+    # Add similar documentation for other endpoints...
+  /api/inserisci-diario:
+    post:
+      summary: Insert Diary Entry
+      description: Insert a new diary entry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object  # Define your request body schema accordingly
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+    # Add similar documentation for other endpoints...
+  /p002_ProgettoPCTO/p002_ProgettoPCTOcode/api/visualizza-diario:
+    get:
+      summary: View Diary
+      description: View diary entries for a student
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+            format: email
+            description: Student's email
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array  # Define your response schema accordingly
+    # Add similar documentation for other endpoints...
+  /p002_ProgettoPCTO/p002_ProgettoPCTOcode/api/modifica-diario:
+    put:
+      summary: Update Diary Entry
+      description: Update an existing diary entry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object  # Define your request body schema accordingly
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+    # Add similar documentation for other endpoints...
+  /p002_ProgettoPCTO/p002_ProgettoPCTOcode/api/elimina-diario:
+    post:
+      summary: Delete Diary Entry
+      description: Delete an existing diary entry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object  # Define your request body schema accordingly
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+    # Add similar documentation for other endpoints...

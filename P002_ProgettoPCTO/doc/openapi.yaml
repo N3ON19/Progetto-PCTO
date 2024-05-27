@@ -1,0 +1,224 @@
+openapi: 3.0.0
+info:
+  title: Progetto PCTO API
+  description: API per gestire le risorse del progetto PCTO
+  version: 1.0.0
+servers:
+  - url: http://example.com/api/v1
+paths:
+  /studenti:
+    get:
+      summary: Restituisce tutti gli studenti
+      responses:
+        '200':
+          description: Elenco degli studenti
+    post:
+      summary: Crea un nuovo studente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Studente'
+      responses:
+        '201':
+          description: Studente creato con successo
+  /assegna:
+    post:
+      summary: Assegna uno studente a un'azienda
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                IDStudente:
+                  type: integer
+                IDAzienda:
+                  type: integer
+                IDAmministratore:
+                  type: integer
+              required:
+                - IDStudente
+                - IDAzienda
+                - IDAmministratore
+      responses:
+        '201':
+          description: Studente assegnato con successo
+  /cambio_azienda:
+    put:
+      summary: Cambia l'azienda dello studente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                IDStudente:
+                  type: integer
+                NuovaIDAzienda:
+                  type: integer
+              required:
+                - IDStudente
+                - NuovaIDAzienda
+      responses:
+        '200':
+          description: Azienda cambiata con successo
+  /diario:
+    post:
+      summary: Compila il diario giornaliero
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                IDStudente:
+                  type: integer
+                Giorno:
+                  type: string
+                  format: date
+                Descrizione:
+                  type: string
+                EntrataMattino:
+                  type: string
+                  format: time
+                UscitaMattino:
+                  type: string
+                  format: time
+                EntrataPomeriggio:
+                  type: string
+                  format: time
+                UscitaPomeriggio:
+                  type: string
+                  format: time
+                Ruolo:
+                  type: string
+              required:
+                - IDStudente
+                - Giorno
+                - Descrizione
+                - EntrataMattino
+                - UscitaMattino
+                - EntrataPomeriggio
+                - UscitaPomeriggio
+                - Ruolo
+      responses:
+        '201':
+          description: Diario compilato con successo
+  /tutor/{IDStudente}:
+    get:
+      summary: Restituisce il tutor assegnato allo studente
+      parameters:
+        - name: IDStudente
+          in: path
+          description: ID dello studente
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Tutor dello studente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tutor'
+  /recensioni:
+    get:
+      summary: Restituisce tutte le recensioni delle aziende
+      responses:
+        '200':
+          description: Elenco delle recensioni delle aziende
+components:
+  schemas:
+    Studente:
+      type: object
+      properties:
+        IDStudent:
+          type: integer
+        Nome:
+          type: string
+        Cognome:
+          type: string
+        Classe:
+          type: string
+        AnnoAccademico:
+          type: string
+        Email:
+          type: string
+        Indirizzo:
+          type: string
+        Voto:
+          type: integer
+        CAP:
+          type: integer
+      required:
+        - Nome
+        - Cognome
+        - Classe
+        - AnnoAccademico
+        - Email
+        - Indirizzo
+        - Voto
+        - CAP
+    Diario:
+      type: object
+      properties:
+        IDDiario:
+          type: integer
+        IDStudente:
+          type: integer
+        Giorno:
+          type: string
+          format: date
+        Descrizione:
+          type: string
+        EntrataMattino:
+          type: string
+          format: time
+        UscitaMattino:
+          type: string
+          format: time
+        EntrataPomeriggio:
+          type: string
+          format: time
+        UscitaPomeriggio:
+          type: string
+          format: time
+        Ruolo:
+          type: string
+      required:
+        - IDDiario
+        - IDStudente
+        - Giorno
+        - Descrizione
+        - EntrataMattino
+        - UscitaMattino
+        - EntrataPomeriggio
+        - UscitaPomeriggio
+        - Ruolo
+    Tutor:
+      type: object
+      properties:
+        IDTutor:
+          type: integer
+        IDAzienda:
+          type: integer
+        Nome:
+          type: string
+        Cognome:
+          type: string
+        NumeroTelefono:
+          type: string
+        Email:
+          type: string
+      required:
+        - IDTutor
+        - IDAzienda
+        - Nome
+        - Cognome
+        - NumeroTelefono
+        - Email
